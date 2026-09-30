@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Express - Xitoy va Turkiyadan Kafolatli Yetkazib Berish</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="bg-indigo-600 text-white p-2.5 rounded-xl shadow-md shadow-indigo-200">
+                    <i class="fa-solid fa-box-open text-xl"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold tracking-tight text-slate-900">Global<span class="text-indigo-600">Express</span></span>
+                    <p class="text-xs text-slate-500 font-medium">Xitoy va Turkiya imorti</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-600">
+                <a href="#features" class="hover:text-indigo-600 transition">Afzalliklar</a>
+                <a href="#calculator" class="hover:text-indigo-600 transition">Narx hisoblash</a>
+                <a href="#steps" class="hover:text-indigo-600 transition">Jarayon</a>
+                <a href="#contact" class="hover:text-indigo-600 transition">Bog'lanish</a>
+            </nav>
+            <div>
+                <a href="#contact" class="hidden sm:inline-flex items-center justify-center px-5 py-2.5 text-sm font-semibold text-white bg-indigo-600 rounded-xl shadow-lg shadow-indigo-200 hover:bg-indigo-700 transition">
+                    Buyurtma berish
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden pt-16 pb-24 lg:pt-24 lg:pb-32 bg-gradient-to-b from-indigo-50/50 via-white to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 text-center lg:text-left">
+                    <span class="inline-flex items-center gap-1.5 py-1.5 px-3.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-600 mb-6">
+                        <i class="fa-solid fa-bolt"></i> Tezkor va Ishonchli Logistika
+                    </span>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+                        Xitoy va Turkiyadan <span class="text-indigo-600">to'g'ridan-to'g'ri</span> yuk tashish
+                    </h1>
+                    <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto lg:mx-0">
+                        Pinduoduo, 1688, Trendyol va boshqa yirik platformalardan mahsulotlarni qulay narxlarda, o'z vaqtida va kafolat bilan eshigingizgacha yetkazib beramiz.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#calculator" class="w-full sm:w-auto px-8 py-4 bg-indigo-600 text-white font-semibold rounded-xl shadow-xl shadow-indigo-200 hover:bg-indigo-700 transition text-center">
+                            Hisob-kitob qilish <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </a>
+                        <a href="https://t.me/" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-white text-slate-700 font-semibold rounded-xl border border-slate-200 hover:bg-slate-50 transition text-center shadow-sm">
+                            <i class="fa-brands fa-telegram text-sky-500 mr-2 text-lg"></i> Telegramdan yozish
+                        </a>
+                    </div>
+                </div>
+                <div class="lg:col-span-5">
+                    <div class="bg-white p-6 sm:p-8 rounded-3xl shadow-2xl border border-slate-100 relative">
+                        <div class="absolute -top-4 -right-4 bg-amber-400 text-slate-900 text-xs font-bold px-3 py-1.5 rounded-lg shadow-md uppercase tracking-wider">
+                            Tezkor yetkazish
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-4">Tezkor Bog'lanish</h3>
+                        <form onsubmit="event.preventDefault(); alert('Buyurtmangiz qabul qilindi! Tez orada bog\'lanamiz.');" class="space-y-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Ismingiz</label>
+                                <input type="text" required placeholder="Masalan: Alisher" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Telefon raqam</label>
+                                <input type="tel" required placeholder="+998 (90) 123-45-67" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Mahsulot havolasi yoki izoh</label>
+                                <textarea rows="3" placeholder="Link yoki qanday mahsulot kerakligini yozing..." class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 text-sm"></textarea>
+                            </div>
+                            <button type="submit" class="w-full py-3.5 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:bg-indigo-700 transition">
+                                Ariza yuborish
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 tracking-tight mb-4">Nega bizni tanlashadi?</h2>
+                <p class="text-slate-600">Biz mijozlarimizga xavfsiz, tezkor va shaffof import xizmatlarini taqdim etamiz.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition duration-300">
+                    <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mb-6 font-bold">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">100% Kafolat</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Yukingiz manziliga to'liq va shikastlanmagan holda yetib kelishi ta'minlanadi.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition duration-300">
+                    <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mb-6 font-bold">
+                        <i class="fa-solid fa-tags"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Eng Past Narxlar</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Xitoy (1688, Pinduoduo) va Turkiya fabrikalaridan vositachilarsiz arzon narxlarda olib kelamiz.</p>
+                </div>
+                <div class="bg-slate-50 p-8 rounded-3xl border border-slate-100 hover:shadow-xl transition duration-300">
+                    <div class="w-14 h-14 bg-indigo-100 text-indigo-600 rounded-2xl flex items-center justify-center text-2xl mb-6 font-bold">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Tezkor yetkazish</h3>
+                    <p class="text-slate-600 text-sm leading-relaxed">Doimiy yo'lga qo'yilgan logistika tarmog'imiz orqali belgilangan muddatda yetkazamiz.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculator Section -->
+    <section id="calculator" class="py-20 bg-slate-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white p-8 sm:p-12 rounded-3xl shadow-xl border border-slate-100">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">Taxminiy Narx Hisoblagich</h2>
+                    <p class="text-slate-600 text-sm">Yukingiz vaznini kiriting va taxminiy yetkazib berish narxini bilib oling.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-2">Yuk yo'nalishi</label>
+                        <select id="route" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 text-sm">
+                            <option value="china">Xitoy — O'zbekiston ($4 / kg)</option>
+                            <option value="turkey">Turkiya — O'zbekiston ($6 / kg)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-2">Yuk og'irligi (kg)</label>
+                        <input type="number" id="weight" value="5" min="1" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 text-sm">
+                    </div>
+                </div>
+                <div class="p-6 bg-indigo-50/60 rounded-2xl flex items-center justify-between flex-wrap gap-4 border border-indigo-100">
+                    <div>
+                        <span class="text-xs font-semibold text-indigo-600 uppercase">Taxminiy umumiy qiymat:</span>
+                        <div id="result" class="text-3xl font-extrabold text-slate-900 mt-1">$20</div>
+                    </div>
+                    <button onclick="calculatePrice()" class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:bg-indigo-700 transition text-sm">
+                        Hisoblash
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-slate-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="bg-indigo-600 text-white p-2.5 rounded-xl">
+                    <i class="fa-solid fa-box-open text-xl"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight">GlobalExpress</span>
+            </div>
+            <p class="text-sm text-slate-400">&copy; 2026 GlobalExpress. Barcha huquqlar himoyalangan.</p>
+            <div class="flex space-x-4">
+                <a href="#" class="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center hover:bg-indigo-600 transition"><i class="fa-brands fa-telegram"></i></a>
+                <a href="#" class="w-10 h-10 bg-slate-800 rounded-xl flex items-center justify-center hover:bg-indigo-600 transition"><i class="fa-brands fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script for Calculator -->
+    <script>
+        function calculatePrice() {
+            const route = document.getElementById('route').value;
+            const weight = parseFloat(document.getElementById('weight').value) || 0;
+            let rate = route === 'china' ? 4 : 6;
+            let total = weight * rate;
+            document.getElementById('result').innerText = '$' + total;
+        }
+    </script>
+</body>
+</html>
