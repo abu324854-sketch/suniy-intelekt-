@@ -3,254 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Express - Global Import va Yetkazib Berish Xizmati</title>
+    <title>Global Express: Biznes Magnat - Strategik O'yin</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between">
 
-    <!-- Header / Navbar -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+    <!-- O'yin Yuqori Paneli (Statistika & Balans) -->
+    <header class="sticky top-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center space-x-3">
-                <div class="bg-indigo-600 text-white p-2.5 rounded-xl shadow-md shadow-indigo-200">
-                    <i class="fa-solid fa-globe text-xl"></i>
+                <div class="bg-gradient-to-tr from-indigo-600 to-violet-500 text-white p-3 rounded-2xl shadow-lg shadow-indigo-500/30">
+                    <i class="fa-solid fa-gamepad text-2xl"></i>
                 </div>
                 <div>
-                    <span class="text-xl font-bold tracking-tight text-slate-900">Global<span class="text-indigo-600">Express</span></span>
-                    <p class="text-xs text-slate-500 font-medium">Global Logistika</p>
+                    <span class="text-xl font-extrabold tracking-tight text-white">Global<span class="text-indigo-400">Tycoon</span></span>
+                    <p class="text-xs text-slate-400 font-medium">Import Biznes Simulyatori</p>
                 </div>
             </div>
-            <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-slate-600">
-                <a href="#countries" class="hover:text-indigo-600 transition">Mamlakatlar</a>
-                <a href="#calculator" class="hover:text-indigo-600 transition">Narx hisoblash</a>
-                <a href="#catalog" class="hover:text-indigo-600 transition">Tovar katalogi</a>
-                <a href="#management" id="nav-management-link" class="hidden text-indigo-600 font-bold hover:underline transition"><i class="fa-solid fa-gauge-high mr-1"></i> Boshqaruv & Foyda</a>
-            </nav>
-            <div class="flex items-center space-x-3">
-                <button onclick="openAuthModal()" class="px-4 py-2 text-sm font-semibold text-indigo-600 bg-indigo-50 rounded-xl hover:bg-indigo-100 transition">
-                    <i class="fa-solid fa-user-lock mr-1"></i> <span id="auth-btn-text">Kirish (Admin/Sotuvchi)</span>
+
+            <!-- O'yin resurslari -->
+            <div class="flex items-center space-x-4 sm:space-x-8">
+                <div class="bg-slate-800 px-4 py-2 rounded-2xl border border-slate-700 flex items-center space-x-2">
+                    <i class="fa-solid fa-wallet text-emerald-400 text-lg"></i>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold text-slate-400">Balans</p>
+                        <p id="player-balance" class="text-sm sm:text-base font-extrabold text-emerald-400">5,000,000 so'm</p>
+                    </div>
+                </div>
+                <div class="bg-slate-800 px-4 py-2 rounded-2xl border border-slate-700 hidden sm:flex items-center space-x-2">
+                    <i class="fa-solid fa-chart-line text-amber-400 text-lg"></i>
+                    <div>
+                        <p class="text-[10px] uppercase font-bold text-slate-400">Sof Foyda</p>
+                        <p id="player-profit" class="text-sm sm:text-base font-extrabold text-amber-400">0 so'm</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kirish & Boshqaruv -->
+            <div>
+                <button onclick="openAuthModal()" class="px-4 py-2.5 text-xs sm:text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-500 rounded-xl shadow-lg shadow-indigo-600/30 transition">
+                    <i class="fa-solid fa-user-gear mr-1"></i> <span id="auth-btn-text">Admin / Sotuvchi</span>
                 </button>
-                <a href="#contact" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-indigo-600 rounded-xl shadow-md hover:bg-indigo-700 transition">
-                    Buyurtma
-                </a>
             </div>
         </div>
     </header>
 
-    <!-- Management Section (Admin & Sotuvchilar uchun maxsus panel) -->
-    <section id="management" class="py-12 bg-indigo-900 text-white hidden">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4 border-b border-indigo-800 pb-6">
+    <!-- Asosiy O'yin Maydoni -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
+        
+        <!-- Tab Menyular -->
+        <div class="flex space-x-2 sm:space-x-4 mb-8 overflow-x-auto pb-2 hide-scrollbar">
+            <button onclick="switchTab('market')" id="tab-market" class="px-6 py-3 bg-indigo-600 text-white font-bold rounded-2xl shadow-lg shadow-indigo-600/30 transition text-sm flex items-center space-x-2">
+                <i class="fa-solid fa-store"></i> <span>Global Bozor (Import)</span>
+            </button>
+            <button onclick="switchTab('warehouse')" id="tab-warehouse" class="px-6 py-3 bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold rounded-2xl transition text-sm flex items-center space-x-2">
+                <i class="fa-solid fa-boxes-stacked"></i> <span>Mening Omborim (<span id="warehouse-count">0</span>)</span>
+            </button>
+            <button onclick="switchTab('admin')" id="tab-admin" class="px-6 py-3 bg-slate-800 text-slate-300 hover:bg-slate-700 font-bold rounded-2xl transition text-sm flex items-center space-x-2 hidden">
+                <i class="fa-solid fa-gauge-high"></i> <span>Admin & Sotuvchi Paneli</span>
+            </button>
+        </div>
+
+        <!-- 1. GLOBAL BOZOR (Mahsulot sotib olish va zakaz qilish) -->
+        <div id="section-market" class="space-y-6">
+            <div class="bg-gradient-to-r from-indigo-900/50 to-slate-800/80 p-6 sm:p-8 rounded-3xl border border-indigo-500/20 flex flex-col md:flex-row justify-between items-center gap-6">
                 <div>
-                    <span class="bg-indigo-500 text-white text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider" id="user-role-badge">Admin Panel</span>
-                    <h2 class="text-3xl font-extrabold mt-2">Tovar va Foyda Boshqaruvi</h2>
-                    <p class="text-indigo-200 text-sm">Barcha narxlar so'mda (UZS) hisoblanadi. Sof foyda avtomatik ko'rsatiladi.</p>
+                    <span class="px-3 py-1 bg-indigo-500/20 text-indigo-400 font-bold text-xs rounded-full border border-indigo-500/30">Xitoy & Turkiya zaxiralari</span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">Tovarlarni Import Qiling va Soting</h2>
+                    <p class="text-slate-400 text-sm mt-1">Xorijdan tovarni arzon narxda sotib oling, omborda saqlang va mijozlarga sotib sof foyda qiling!</p>
                 </div>
-                <button onclick="logout()" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold rounded-xl transition">
-                    <i class="fa-solid fa-right-from-bracket mr-1"></i> Chiqish
+                <button onclick="simulateDay()" class="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-2xl shadow-lg shadow-emerald-600/30 transition flex items-center space-x-2 text-sm whitespace-nowrap">
+                    <i class="fa-solid fa-forward-step"></i> <span>Kunni O'tkazish (+ Savdo)</span>
                 </button>
             </div>
 
-            <!-- Statistikalar -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
-                <div class="bg-indigo-800/60 p-6 rounded-2xl border border-indigo-700">
-                    <p class="text-xs text-indigo-300 uppercase font-semibold">Jami Tovarlar</p>
-                    <h3 class="text-3xl font-extrabold mt-1" id="stat-total-products">0 ta</h3>
-                </div>
-                <div class="bg-indigo-800/60 p-6 rounded-2xl border border-indigo-700">
-                    <p class="text-xs text-indigo-300 uppercase font-semibold">Umumiy Savdo Qiymati</p>
-                    <h3 class="text-3xl font-extrabold mt-1 text-emerald-400" id="stat-total-revenue">0 so'm</h3>
-                </div>
-                <div class="bg-indigo-800/60 p-6 rounded-2xl border border-indigo-700">
-                    <p class="text-xs text-indigo-300 uppercase font-semibold">Kutilayotgan Sof Foyda</p>
-                    <h3 class="text-3xl font-extrabold mt-1 text-amber-400" id="stat-total-profit">0 so'm</h3>
-                </div>
+            <!-- Mamlakatlar filtr -->
+            <div class="flex gap-2 overflow-x-auto pb-2">
+                <button onclick="filterMarket('all')" class="px-4 py-2 bg-indigo-600 text-white text-xs font-bold rounded-xl market-cat active">Barcha Davlatlar</button>
+                <button onclick="filterMarket('Xitoy')" class="px-4 py-2 bg-slate-800 text-slate-300 text-xs font-bold rounded-xl hover:bg-slate-700 market-cat">🇨🇳 Xitoy (Arzon)</button>
+                <button onclick="filterMarket('Turkiya')" class="px-4 py-2 bg-slate-800 text-slate-300 text-xs font-bold rounded-xl hover:bg-slate-700 market-cat">🇹🇷 Turkiya (Brend)</button>
+                <button onclick="filterMarket('AQSh')" class="px-4 py-2 bg-slate-800 text-slate-300 text-xs font-bold rounded-xl hover:bg-slate-700 market-cat">🇺🇸 AQSh (Qimmat/Yuqori foyda)</button>
             </div>
 
-            <!-- Yangi tovar qo'shish formasi -->
-            <div class="bg-white text-slate-800 p-6 sm:p-8 rounded-3xl shadow-2xl">
-                <h3 class="text-xl font-bold mb-4 text-slate-900"><i class="fa-solid fa-plus-circle text-indigo-600 mr-2"></i> Katalogga Yangi Tovar Qo'shish</h3>
-                <form onsubmit="addNewProduct(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Tovar nomi</label>
-                        <input type="text" id="new-name" required placeholder="Masalan: Smartfon X" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-600">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Mamlakat</label>
-                        <select id="new-country" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-600">
-                            <option value="Xitoy">Xitoy</option>
-                            <option value="Turkiya">Turkiya</option>
-                            <option value="AQSh">AQSh</option>
-                            <option value="Koreya">Koreya</option>
-                            <option value="BAA">BAA</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Tannarxi (so'mda)</label>
-                        <input type="number" id="new-cost" required placeholder="1200000" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-600">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Sotuv narxi (so'mda)</label>
-                        <input type="number" id="new-price" required placeholder="1600000" class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-600">
-                    </div>
-                    <div class="sm:col-span-2 lg:col-span-4">
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Rasm havolasi (URL)</label>
-                        <input type="url" id="new-img" required placeholder="https://images.unsplash.com/..." class="w-full px-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-indigo-600">
-                    </div>
-                    <div class="sm:col-span-2 lg:col-span-4">
-                        <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-md transition">
-                            Tovarni Qo'shish va Hisobni Yangilash
-                        </button>
-                    </div>
-                </form>
-            </div>
+            <!-- Bozor Tovarlar Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="market-grid"></div>
         </div>
-    </section>
 
-    <!-- Hero Section -->
-    <section class="relative overflow-hidden pt-16 pb-20 bg-gradient-to-b from-indigo-50/50 via-white to-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <span class="inline-flex items-center gap-1.5 py-1.5 px-3.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-600 mb-6">
-                <i class="fa-solid fa-plane-up"></i> Dunyoning 7 ta yirik davlatidan kafolatli yuk tashish
-            </span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6 max-w-4xl mx-auto">
-                Xitoy, Turkiya va AQShdan <span class="text-indigo-600">import qiling</span>
-            </h1>
-            <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
-                Istalgan xorijiy internet-do'kon yoki fabrikalardan tovarlarni qulay narxlarda O'zbekistonga yetkazib beramiz. Barcha narxlar so'mda!
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#calculator" class="px-8 py-4 bg-indigo-600 text-white font-semibold rounded-xl shadow-xl shadow-indigo-200 hover:bg-indigo-700 transition">
-                    Narxni hisoblash <i class="fa-solid fa-calculator ml-2"></i>
-                </a>
-                <a href="#catalog" class="px-8 py-4 bg-white text-slate-700 font-semibold rounded-xl border border-slate-200 hover:bg-slate-50 transition shadow-sm">
-                    Tovar katalogi (<span id="total-count">0</span>)
-                </a>
+        <!-- 2. MENING OMBORIM -->
+        <div id="section-warehouse" class="space-y-6 hidden">
+            <div class="bg-slate-800/80 p-6 rounded-3xl border border-slate-700">
+                <h2 class="text-2xl font-bold text-white mb-2">Omborda Saqlanayotgan Tovarlar</h2>
+                <p class="text-slate-400 text-sm">Sotib olingan mahsulotlar shu yerda saqlanadi. Har kuni "Kunni o'tkazish" tugmasi orqali xaridorlarga sotiladi.</p>
             </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="warehouse-grid"></div>
         </div>
-    </section>
 
-    <!-- Countries Section -->
-    <section id="countries" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-12">
-                <h2 class="text-3xl font-bold text-slate-900 mb-3">Biz ishlaydigan mamlakatlar</h2>
-                <p class="text-slate-600 text-sm">1 kg yuk tashish tariflari (so'mda ko'rsatilgan)</p>
-            </div>
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6" id="country-grid"></div>
-        </div>
-    </section>
-
-    <!-- Calculator Section -->
-    <section id="calculator" class="py-20 bg-slate-50">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white p-8 sm:p-12 rounded-3xl shadow-xl border border-slate-100">
-                <div class="text-center mb-8">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">Yetkazib Berish Kalkulyatori (So'mda)</h2>
-                    <p class="text-slate-600 text-sm">Mamlakatni tanlang va yuk vaznini kiriting</p>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
+        <!-- 3. ADMIN & SOTUVCHI PANELI (Foyda nazorati va Tovar qo'shish) -->
+        <div id="section-admin" class="space-y-6 hidden">
+            <div class="bg-slate-800/90 p-6 sm:p-8 rounded-3xl border border-indigo-500/30">
+                <div class="flex justify-between items-center mb-6">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-2">Jo'natuvchi mamlakat</label>
-                        <select id="calc-country" onchange="calculatePrice()" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 text-sm">
-                        </select>
+                        <span id="panel-role-badge" class="px-3 py-1 bg-indigo-600 text-white font-bold text-xs rounded-full">Admin Panel</span>
+                        <h2 class="text-2xl font-bold text-white mt-2">Boshqaruv, Narxlar va Sof Foyda Tahlili</h2>
+                        <p class="text-slate-400 text-sm">Barcha hisob-kitoblar so'mda (UZS) olib boriladi.</p>
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-2">Yuk og'irligi (kg)</label>
-                        <input type="number" id="calc-weight" value="5" min="1" oninput="calculatePrice()" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 text-sm">
+                    <button onclick="logout()" class="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs rounded-xl transition">Chiqish</button>
+                </div>
+
+                <!-- Statistika bloklari -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-slate-900/60 p-6 rounded-2xl border border-slate-700">
+                        <p class="text-xs text-slate-400 font-semibold uppercase">Jami Topilgan Sof Foyda</p>
+                        <h3 class="text-3xl font-extrabold text-emerald-400 mt-1" id="admin-total-profit">0 so'm</h3>
+                    </div>
+                    <div class="bg-slate-900/60 p-6 rounded-2xl border border-slate-700">
+                        <p class="text-xs text-slate-400 font-semibold uppercase">Ombardagi Tovar Qiymati</p>
+                        <h3 class="text-3xl font-extrabold text-indigo-400 mt-1" id="admin-warehouse-value">0 so'm</h3>
+                    </div>
+                    <div class="bg-slate-900/60 p-6 rounded-2xl border border-slate-700">
+                        <p class="text-xs text-slate-400 font-semibold uppercase">Sotilgan Mahsulotlar</p>
+                        <h3 class="text-3xl font-extrabold text-amber-400 mt-1" id="admin-sold-count">0 ta</h3>
                     </div>
                 </div>
-                <div class="p-6 bg-indigo-50/60 rounded-2xl flex items-center justify-between flex-wrap gap-4 border border-indigo-100">
-                    <div>
-                        <span class="text-xs font-semibold text-indigo-600 uppercase">Taxminiy xizmat narxi:</span>
-                        <div id="calc-result" class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">0 so'm</div>
-                    </div>
-                    <a href="#contact" class="px-6 py-3 bg-indigo-600 text-white font-semibold rounded-xl shadow-md hover:bg-indigo-700 transition text-sm">
-                        Buyurtma berish
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Catalog Section -->
-    <section id="catalog" class="py-20 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-                <div>
-                    <h2 class="text-3xl font-bold text-slate-900 mb-2">Ommabop Tovar Katalogi</h2>
-                    <p class="text-slate-600 text-sm">Xitoy, Turkiya va boshqa davlatlardan mahsulotlar</p>
-                </div>
-                <div class="mt-4 md:mt-0 flex gap-2 overflow-x-auto pb-2 hide-scrollbar">
-                    <button onclick="filterCategory('all')" class="px-4 py-2 bg-indigo-600 text-white text-xs font-semibold rounded-xl transition cat-btn active">Barchasi</button>
-                    <button onclick="filterCategory('Xitoy')" class="px-4 py-2 bg-slate-100 text-slate-700 text-xs font-semibold rounded-xl hover:bg-slate-200 transition cat-btn">Xitoy</button>
-                    <button onclick="filterCategory('Turkiya')" class="px-4 py-2 bg-slate-100 text-slate-700 text-xs font-semibold rounded-xl hover:bg-slate-200 transition cat-btn">Turkiya</button>
-                    <button onclick="filterCategory('AQSh')" class="px-4 py-2 bg-slate-100 text-slate-700 text-xs font-semibold rounded-xl hover:bg-slate-200 transition cat-btn">AQSh</button>
-                    <button onclick="filterCategory('Koreya')" class="px-4 py-2 bg-slate-100 text-slate-700 text-xs font-semibold rounded-xl hover:bg-slate-200 transition cat-btn">Koreya</button>
-                </div>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="product-grid"></div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-slate-50 border-t border-slate-100">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="bg-white p-8 sm:p-12 rounded-3xl shadow-xl border border-slate-100">
-                <div class="text-center mb-8">
-                    <h2 class="text-2xl sm:text-3xl font-bold text-slate-900 mb-2">Buyurtma berish</h2>
-                    <p class="text-slate-600 text-sm">Ma'lumotlaringizni qoldiring, operatorlarimiz tez orada bog'lanishadi.</p>
-                </div>
-                <form onsubmit="event.preventDefault(); alert('Buyurtmangiz muvaffaqiyatli yuborildi!');" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Yangi Tovar Qo'shish Formasi -->
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-700">
+                    <h3 class="text-lg font-bold text-white mb-4"><i class="fa-solid fa-plus-circle text-indigo-400 mr-2"></i> O'yinga Yangi Tovar Qo'shish</h3>
+                    <form onsubmit="addNewGameProduct(event)" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div>
-                            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Ismingiz</label>
-                            <input type="text" required placeholder="Alisher" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 text-sm">
+                            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Tovar Nomi</label>
+                            <input type="text" id="game-p-name" required placeholder="Masalan: Smartfon" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500">
                         </div>
                         <div>
-                            <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Telefon raqam</label>
-                            <input type="tel" required placeholder="+998 90 123-45-67" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 text-sm">
+                            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Mamlakat</label>
+                            <select id="game-p-country" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500">
+                                <option value="Xitoy">Xitoy</option>
+                                <option value="Turkiya">Turkiya</option>
+                                <option value="AQSh">AQSh</option>
+                            </select>
                         </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Tanlangan tovar</label>
-                        <input type="text" id="order-item-input" placeholder="Katalogdan tanlang" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl focus:outline-none focus:border-indigo-600 text-sm">
-                    </div>
-                    <button type="submit" class="w-full py-4 bg-indigo-600 text-white font-semibold rounded-xl shadow-lg hover:bg-indigo-700 transition">
-                        Buyurtmani tasdiqlash
-                    </button>
-                </form>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Tannarxi (so'mda)</label>
+                            <input type="number" id="game-p-cost" required placeholder="500000" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Sotuv Narxi (so'mda)</label>
+                            <input type="number" id="game-p-price" required placeholder="750000" class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="sm:col-span-2 lg:col-span-4">
+                            <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Rasm havolasi (URL)</label>
+                            <input type="url" id="game-p-img" required placeholder="https://images.unsplash.com/..." class="w-full px-4 py-2.5 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500">
+                        </div>
+                        <div class="sm:col-span-2 lg:col-span-4">
+                            <button type="submit" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl shadow-md transition">
+                                Bozorg Qo'shish
+                            </button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-    </section>
+
+    </main>
 
     <!-- Auth Modal -->
-    <div id="auth-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center hidden">
-        <div class="bg-white p-8 rounded-3xl shadow-2xl max-w-md w-full mx-4 relative">
-            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-600"><i class="fa-solid fa-xmark text-xl"></i></button>
-            <h3 class="text-2xl font-bold mb-2">Tizimga Kirish</h3>
-            <p class="text-xs text-slate-500 mb-6">Admin yoki Sotuvchi sifatida boshqaruv paneliga kiring</p>
+    <div id="auth-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl max-w-md w-full mx-4 relative">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+            <h3 class="text-2xl font-bold text-white mb-2">Boshqaruv Paneli</h3>
+            <p class="text-xs text-slate-400 mb-6">Admin yoki Sotuvchi sifatida kiring</p>
             <div class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Rolni tanlang</label>
-                    <select id="login-role" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm">
-                        <option value="admin">Admin (To'liq huquq)</option>
-                        <option value="sotuvchi">Sotuvchi (Tovar qo'shish & Foyzani ko'rish)</option>
+                    <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Rolni tanlang</label>
+                    <select id="login-role" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white">
+                        <option value="admin">Admin (Barcha huquqlar)</option>
+                        <option value="sotuvchi">Sotuvchi (Foydani ko'rish & Tovar qo'shish)</option>
                     </select>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Parol</label>
-                    <input type="password" id="login-pass" value="1234" class="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm">
+                    <label class="block text-xs font-semibold text-slate-400 uppercase mb-1">Parol</label>
+                    <input type="password" id="login-pass" value="1234" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-sm text-white">
                 </div>
-                <button onclick="login()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl shadow-md transition">
+                <button onclick="login()" class="w-full py-3 bg-indigo-600 hover:bg-indigo-500 text-white font-semibold rounded-xl shadow-lg transition">
                     Kirish
                 </button>
             </div>
@@ -258,158 +199,212 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-            <div class="flex items-center space-x-3">
-                <div class="bg-indigo-600 text-white p-2.5 rounded-xl">
-                    <i class="fa-solid fa-globe text-xl"></i>
-                </div>
-                <span class="text-xl font-bold tracking-tight">GlobalExpress</span>
-            </div>
-            <p class="text-sm text-slate-400">&copy; 2026 GlobalExpress. Barcha huquqlar himoyalangan.</p>
-        </div>
+    <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+        <p>&copy; 2026 Global Express Tycoon. Barcha huquqlar himoyalangan.</p>
     </footer>
 
-    <!-- JavaScript Logika -->
+    <!-- O'yin JavaScript Logikasi -->
     <script>
-        const USD_RATE = 12800; // 1 AQSh dollari kursi so'mda
+        let balance = 5000000; // Boshlang'ich balans 5 mln so'm
+        let totalProfitEarned = 0;
+        let totalSoldUnits = 0;
+        let currentUserRole = null;
 
-        const countries = [
-            { name: "Xitoy", flag: "🇨🇳", rateUSD: 4, desc: "Pinduoduo, 1688, Taobao" },
-            { name: "Turkiya", flag: "🇹🇷", rateUSD: 6, desc: "Trendyol, LC Waikiki" },
-            { name: "AQSh", flag: "🇺🇸", rateUSD: 12, desc: "Amazon, eBay" },
-            { name: "Koreya", flag: "🇰🇷", rateUSD: 9, desc: "Cosmetics, Electronics" },
-            { name: "BAA", flag: "🇦🇪", rateUSD: 8, desc: "Dubai Mall" }
+        // Bozor tovarlari bazasi
+        let marketProducts = [
+            { id: 1, name: "Smartfon X Pro", country: "Xitoy", cost: 1200000, price: 1650000, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&auto=format&fit=crop&q=80" },
+            { id: 2, name: "Brend Krossovka", country: "Turkiya", cost: 350000, price: 520000, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&auto=format&fit=crop&q=80" },
+            { id: 3, name: "Qishki Kurtka", country: "Turkiya", cost: 550000, price: 800000, img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&auto=format&fit=crop&q=80" },
+            { id: 4, name: "Noutbuk Air", country: "AQSh", cost: 5200000, price: 6700000, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&auto=format&fit=crop&q=80" },
+            { id: 5, name: "Koreys Kosmetika Seti", country: "Xitoy", cost: 200000, price: 320000, img: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=400&auto=format&fit=crop&q=80" }
         ];
 
-        let products = [
-            { id: 1, name: "Smartfon X Pro", country: "Xitoy", cost: 1200000, price: 1550000, img: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400&auto=format&fit=crop&q=80" },
-            { name: "Brend Krossovka", country: "Turkiya", cost: 350000, price: 480000, img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&auto=format&fit=crop&q=80" },
-            { name: "Qishki Kurtka", country: "Turkiya", cost: 550000, price: 750000, img: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400&auto=format&fit=crop&q=80" },
-            { name: "Noutbuk Air", country: "AQSh", cost: 5500000, price: 6800000, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=400&auto=format&fit=crop&q=80" },
-            { name: "Koreys Saralangan Set", country: "Koreya", cost: 220000, price: 320000, img: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=400&auto=format&fit=crop&q=80" }
-        ];
-
-        let currentUserRole = null; // 'admin' yoki 'sotuvchi'
+        // Foydalanuvchi ombori (sotib olinganlar)
+        let warehouse = [];
 
         function formatSum(num) {
             return num.toLocaleString('uz-UZ') + " so'm";
         }
 
-        function initApp() {
-            renderCountries();
-            renderProducts(products);
-            updateStats();
-        }
-
-        function renderCountries() {
-            const grid = document.getElementById('country-grid');
-            const select = document.getElementById('calc-country');
+        function updateStatsUI() {
+            document.getElementById('player-balance').innerText = formatSum(balance);
+            document.getElementById('player-profit').innerText = formatSum(totalProfitEarned);
+            document.getElementById('warehouse-count').innerText = warehouse.length;
+            document.getElementById('admin-total-profit').innerText = formatSum(totalProfitEarned);
+            document.getElementById('admin-sold-count').innerText = totalSoldUnits + " ta";
             
-            grid.innerHTML = countries.map(c => `
-                <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100 text-center hover:shadow-lg transition">
-                    <div class="text-4xl mb-2">${c.flag}</div>
-                    <h3 class="font-bold text-slate-900 text-base">${c.name}</h3>
-                    <p class="text-xs text-slate-500 mb-3">${c.desc}</p>
-                    <span class="inline-block px-3 py-1 bg-indigo-50 text-indigo-600 font-bold text-xs rounded-full">${formatSum(c.rateUSD * USD_RATE)} / kg</span>
-                </div>
-            `).join('');
-
-            select.innerHTML = countries.map(c => `
-                <option value="${c.rateUSD * USD_RATE}">${c.name} (${formatSum(c.rateUSD * USD_RATE)} / kg)</option>
-            `).join('');
-            calculatePrice();
+            const whValue = warehouse.reduce((acc, item) => acc + item.cost, 0);
+            document.getElementById('admin-warehouse-value').innerText = formatSum(whValue);
         }
 
-        function calculatePrice() {
-            const rateSum = parseFloat(document.getElementById('calc-country').value) || 0;
-            const weight = parseFloat(document.getElementById('calc-weight').value) || 0;
-            const total = rateSum * weight;
-            document.getElementById('calc-result').innerText = formatSum(total);
+        function switchTab(tabName) {
+            document.getElementById('section-market').classList.add('hidden');
+            document.getElementById('section-warehouse').classList.add('hidden');
+            document.getElementById('section-admin').classList.add('hidden');
+            
+            document.getElementById('tab-market').className = "px-6 py-3 bg-slate-800 text-slate-300 font-bold rounded-2xl transition text-sm flex items-center space-x-2";
+            document.getElementById('tab-warehouse').className = "px-6 py-3 bg-slate-800 text-slate-300 font-bold rounded-2xl transition text-sm flex items-center space-x-2";
+            document.getElementById('tab-admin').className = "px-6 py-3 bg-slate-800 text-slate-300 font-bold rounded-2xl transition text-sm flex items-center space-x-2";
+
+            if(tabName === 'market') {
+                document.getElementById('section-market').classList.remove('hidden');
+                document.getElementById('tab-market').className = "px-6 py-3 bg-indigo-600 text-white font-bold rounded-2xl shadow-lg shadow-indigo-600/30 transition text-sm flex items-center space-x-2";
+                renderMarket(marketProducts);
+            } else if(tabName === 'warehouse') {
+                document.getElementById('section-warehouse').classList.remove('hidden');
+                document.getElementById('tab-warehouse').className = "px-6 py-3 bg-indigo-600 text-white font-bold rounded-2xl shadow-lg shadow-indigo-600/30 transition text-sm flex items-center space-x-2";
+                renderWarehouse();
+            } else if(tabName === 'admin') {
+                document.getElementById('section-admin').classList.remove('hidden');
+                document.getElementById('tab-admin').className = "px-6 py-3 bg-indigo-600 text-white font-bold rounded-2xl shadow-lg shadow-indigo-600/30 transition text-sm flex items-center space-x-2";
+            }
         }
 
-        function renderProducts(items) {
-            const grid = document.getElementById('product-grid');
-            document.getElementById('total-count').innerText = items.length;
-
+        function renderMarket(items) {
+            const grid = document.getElementById('market-grid');
             grid.innerHTML = items.map(item => {
                 const profit = item.price - item.cost;
                 const profitPercent = Math.round((profit / item.cost) * 100);
                 
-                // Faqat admin va sotuvchilarga foyda ko'rinib turadi
-                let profitBadge = '';
+                let adminBadge = '';
                 if(currentUserRole) {
-                    profitBadge = `
-                        <div class="mt-2 p-2 bg-emerald-50 border border-emerald-100 rounded-xl text-xs flex justify-between items-center">
-                            <span class="text-emerald-700 font-semibold">Sof foyda:</span>
-                            <span class="font-bold text-emerald-800">+${formatSum(profit)} (${profitPercent}%)</span>
+                    adminBadge = `
+                        <div class="mt-2 mb-3 p-2 bg-emerald-950/60 border border-emerald-500/30 rounded-xl text-xs flex justify-between items-center">
+                            <span class="text-emerald-400 font-semibold">Kutilayotgan foyda:</span>
+                            <span class="font-bold text-emerald-300">+${formatSum(profit)} (${profitPercent}%)</span>
                         </div>
                     `;
                 }
 
                 return `
-                    <div class="bg-slate-50 rounded-2xl p-4 border border-slate-100 hover:shadow-xl transition flex flex-col justify-between">
+                    <div class="bg-slate-800/80 rounded-2xl p-4 border border-slate-700 flex flex-col justify-between hover:border-indigo-500/50 transition">
                         <div>
-                            <div class="relative h-48 rounded-xl overflow-hidden mb-4 bg-white">
+                            <div class="relative h-44 rounded-xl overflow-hidden mb-3 bg-slate-900">
                                 <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover">
-                                <span class="absolute top-2 right-2 px-2.5 py-1 bg-white/90 backdrop-blur-sm text-xs font-bold rounded-lg shadow-sm text-slate-800">${item.country}</span>
+                                <span class="absolute top-2 right-2 px-2.5 py-1 bg-slate-900/90 text-xs font-bold rounded-lg text-white border border-slate-700">${item.country}</span>
                             </div>
-                            <h3 class="font-bold text-slate-900 text-sm mb-1">${item.name}</h3>
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="text-slate-400 text-xs line-through">Tannarx: ${formatSum(item.cost)}</span>
-                                <span class="text-indigo-600 font-extrabold text-base">${formatSum(item.price)}</span>
+                            <h3 class="font-bold text-white text-sm mb-1">${item.name}</h3>
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs text-slate-400">Tannarx:</span>
+                                <span class="text-sm font-semibold text-indigo-300">${formatSum(item.cost)}</span>
                             </div>
-                            ${profitBadge}
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="text-xs text-slate-400">Sotuv narxi:</span>
+                                <span class="text-sm font-bold text-emerald-400">${formatSum(item.price)}</span>
+                            </div>
+                            ${adminBadge}
                         </div>
-                        <button onclick="selectProduct('${item.name} (${item.country})')" class="mt-4 w-full py-2.5 bg-indigo-600 text-white text-xs font-semibold rounded-xl shadow-sm hover:bg-indigo-700 transition">
-                            Buyurtma berish
+                        <button onclick="buyProduct(${item.id})" class="w-full py-2.5 bg-indigo-600 hover:bg-indigo-500 text-white font-bold rounded-xl text-xs transition shadow-md">
+                            Sotib Olish (Zakaz)
                         </button>
                     </div>
                 `;
             }).join('');
         }
 
-        function filterCategory(country) {
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.classList.remove('bg-indigo-600', 'text-white');
-                btn.classList.add('bg-slate-100', 'text-slate-700');
+        function filterMarket(country) {
+            document.querySelectorAll('.market-cat').forEach(btn => {
+                btn.className = "px-4 py-2 bg-slate-800 text-slate-300 text-xs font-bold rounded-xl hover:bg-slate-700 market-cat";
             });
-            event.target.classList.remove('bg-slate-100', 'text-slate-700');
-            event.target.classList.add('bg-indigo-600', 'text-white');
+            event.target.className = "px-4 py-2 bg-indigo-600 text-white text-xs font-bold rounded-xl market-cat active";
 
             if(country === 'all') {
-                renderProducts(products);
+                renderMarket(marketProducts);
             } else {
-                renderProducts(products.filter(p => p.country === country));
+                renderMarket(marketProducts.filter(p => p.country === country));
             }
         }
 
-        function addNewProduct(event) {
+        function buyProduct(id) {
+            const product = marketProducts.find(p => p.id === id);
+            if(balance >= product.cost) {
+                balance -= product.cost;
+                warehouse.push({...product, uniqueId: Date.now() + Math.random()});
+                updateStatsUI();
+                alert(`Muvaffaqiyatli sotib olindi! ${product.name} omborga qo'shildi.`);
+            } else {
+                alert("Balansingizda mablag' yetarli emas! Kunni o'tkazib pul toping.");
+            }
+        }
+
+        function renderWarehouse() {
+            const grid = document.getElementById('warehouse-grid');
+            if(warehouse.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-12 text-slate-500">Omboringiz hozircha bo'sh. Global Bozordan tovar sotib oling!</div>`;
+                return;
+            }
+
+            grid.innerHTML = warehouse.map(item => `
+                <div class="bg-slate-800/80 rounded-2xl p-4 border border-slate-700 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-40 rounded-xl overflow-hidden mb-3 bg-slate-900">
+                            <img src="${item.img}" alt="${item.name}" class="w-full h-full object-cover">
+                            <span class="absolute top-2 right-2 px-2 py-0.5 bg-slate-900 text-xs font-bold rounded text-white">${item.country}</span>
+                        </div>
+                        <h3 class="font-bold text-white text-sm mb-1">${item.name}</h3>
+                        <p class="text-xs text-slate-400">Tannarx: ${formatSum(item.cost)}</p>
+                        <p class="text-xs text-emerald-400 font-bold mt-1">Kutilayotgan narx: ${formatSum(item.price)}</p>
+                    </div>
+                    <button onclick="sellSpecificProduct(${item.uniqueId})" class="mt-4 w-full py-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition">
+                        Hoziroq Sotish (+${formatSum(item.price - item.cost)} foyda)
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function sellSpecificProduct(uniqueId) {
+            const index = warehouse.findIndex(w => w.uniqueId === uniqueId);
+            if(index !== -1) {
+                const item = warehouse[index];
+                const profit = item.price - item.cost;
+                balance += item.price;
+                totalProfitEarned += profit;
+                totalSoldUnits++;
+                warehouse.splice(index, 1);
+                updateStatsUI();
+                renderWarehouse();
+                alert(`Tovar sotildi! Sof foyda: +${formatSum(profit)}`);
+            }
+        }
+
+        function simulateDay() {
+            if(warehouse.length === 0) {
+                alert("Omborda tovar yo'q! Oldin bozordan tovar sotib oling.");
+                return;
+            }
+            // Tasodifiy 1 yoki 2 ta tovarni sotish
+            let soldCount = Math.min(warehouse.length, Math.floor(Math.random() * 2) + 1);
+            let earnedProfitBatch = 0;
+            
+            for(let i = 0; i < soldCount; i++) {
+                const item = warehouse.shift(); // Ombrdan chiqarish
+                const profit = item.price - item.cost;
+                balance += item.price;
+                earnedProfitBatch += profit;
+                totalProfitEarned += profit;
+                totalSoldUnits++;
+            }
+
+            updateStatsUI();
+            if(document.getElementById('section-warehouse').classList.contains('hidden') === false) {
+                renderWarehouse();
+            }
+            alert(`Kun yakunlandi! Mijozlar ${soldCount} ta tovarni sotib olishdi. Sof foyda: +${formatSum(earnedProfitBatch)}`);
+        }
+
+        function addNewGameProduct(event) {
             event.preventDefault();
-            const name = document.getElementById('new-name').value;
-            const country = document.getElementById('new-country').value;
-            const cost = parseFloat(document.getElementById('new-cost').value);
-            const price = parseFloat(document.getElementById('new-price').value);
-            const img = document.getElementById('new-img').value;
+            const name = document.getElementById('game-p-name').value;
+            const country = document.getElementById('game-p-country').value;
+            const cost = parseFloat(document.getElementById('game-p-cost').value);
+            const price = parseFloat(document.getElementById('game-p-price').value);
+            const img = document.getElementById('game-p-img').value;
 
-            products.unshift({ name, country, cost, price, img });
-            renderProducts(products);
-            updateStats();
-            alert("Tovar muvaffaqiyatli qo'shildi!");
+            marketProducts.unshift({ id: Date.now(), name, country, cost, price, img });
+            renderMarket(marketProducts);
+            updateStatsUI();
+            alert("Yangi tovar o'yin bozoriga qo'shildi!");
             event.target.reset();
-        }
-
-        function updateStats() {
-            document.getElementById('stat-total-products').innerText = products.length + " ta";
-            const totalRev = products.reduce((acc, p) => acc + p.price, 0);
-            const totalProf = products.reduce((acc, p) => acc + (p.price - p.cost), 0);
-            document.getElementById('stat-total-revenue').innerText = formatSum(totalRev);
-            document.getElementById('stat-total-profit').innerText = formatSum(totalProf);
-        }
-
-        function selectProduct(name) {
-            document.getElementById('order-item-input').value = name;
-            window.location.href = '#contact';
         }
 
         function openAuthModal() {
@@ -423,25 +418,26 @@
         function login() {
             const role = document.getElementById('login-role').value;
             currentUserRole = role;
-            document.getElementById('user-role-badge').innerText = role === 'admin' ? 'Admin Panel' : 'Sotuvchi Paneli';
-            document.getElementById('management').classList.remove('hidden');
-            document.getElementById('nav-management-link').classList.remove('hidden');
+            document.getElementById('panel-role-badge').innerText = role === 'admin' ? 'Admin Paneli' : 'Sotuvchi Paneli';
+            document.getElementById('tab-admin').classList.remove('hidden');
             document.getElementById('auth-btn-text').innerText = role === 'admin' ? 'Admin (Faol)' : 'Sotuvchi (Faol)';
             closeAuthModal();
-            renderProducts(products);
-            window.location.href = '#management';
+            switchTab('admin');
+            renderMarket(marketProducts);
         }
 
         function logout() {
             currentUserRole = null;
-            document.getElementById('management').classList.add('hidden');
-            document.getElementById('nav-management-link').classList.add('hidden');
-            document.getElementById('auth-btn-text').innerText = 'Kirish (Admin/Sotuvchi)';
-            renderProducts(products);
-            window.scrollTo({top: 0, behavior: 'smooth'});
+            document.getElementById('tab-admin').classList.add('hidden');
+            document.getElementById('auth-btn-text').innerText = 'Admin / Sotuvchi';
+            switchTab('market');
+            renderMarket(marketProducts);
         }
 
-        window.onload = initApp;
+        window.onload = function() {
+            updateStatsUI();
+            renderMarket(marketProducts);
+        };
     </script>
 </body>
 </html>
